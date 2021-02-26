@@ -1,6 +1,3 @@
-| 序号 | 知识点     | 题目                                                         | 难度 |
-| ---- | ---------- | ------------------------------------------------------------ | ---- |
-| 1    | 字符串操作 | [443. 压缩字符串](https://leetcode-cn.com/problems/string-compression/) | 中等 |
-|      |            |                                                              |      |
-|      |            |                                                              |      |
+https://www.nowcoder.com  
+https://leetcode-cn.com/
 
