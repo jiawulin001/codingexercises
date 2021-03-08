@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main2(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String modelStr;
         String str;
@@ -56,5 +56,36 @@ public class Main {
                 }
             }
         }
+    }
+
+
+    // *：匹配0个或以上的字符（字符由英文字母和数字0-9组成，不区分大小写。下同）
+    //？：匹配1个字符
+    //te?t*.*
+    //txt12.xls
+    //有一个用例不过：a* a
+    public static void main(String[] args) throws Exception {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String str1, str2;
+        while ((str1 = in.readLine()) != null) {
+            str2 = in.readLine();
+            System.out.println(matches(str1, str2, 0, 0));
+        }
+    }
+
+    private static boolean matches(String str1, String str2, int index1, int index2) {
+        if (index1 == str1.length() && index2 == str2.length()) {
+            return true;
+        } else if (index1 == str1.length() || index2 == str2.length()) {
+            return false;
+        }
+
+        if ('*' == str1.charAt(index1)) {
+            return matches(str1, str2, index1 + 1, index2) || matches(str1, str2, index1 + 1, index2 + 1);
+        } else if ('?' == str1.charAt(index1) || str1.charAt(index1) == str2.charAt(index2)) {
+            return matches(str1, str2, index1 + 1, index2 + 1);
+        }
+
+        return false;
     }
 }
