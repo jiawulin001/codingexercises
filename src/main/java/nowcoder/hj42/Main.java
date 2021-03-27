@@ -17,5 +17,10 @@ public class Main {
         //length == 5 million thousand hundred and
         //length == 6 billion million thousand hundred and
 
+        String ones[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+        String tens[] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nighteen"};
+        String twenties[] = {"zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+        String hundreds[] = {"hundred", "thousand", "million", "billion"};
+
     }
 }

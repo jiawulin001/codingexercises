@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Main {
+public class Main3 {
     public static void main(String[] args) {
         List<String> game = Arrays.asList("skipping rope", "sit-ups", "Rubik's Cube");
         List<List<String>> athletes = Arrays.asList(Arrays.asList("sit-ups"), Arrays.asList("skipping rope"), Arrays.asList("sit-ups", "Rubik's Cube"));
@@ -19,7 +19,7 @@ public class Main {
         List athlete;
         List<String> tempList = new ArrayList<>();
         tempList.addAll(game);
-        Iterator<String> games;
+        Iterator<String>  games;
         boolean isChoose = false;
 
 
@@ -91,4 +91,3 @@ public class Main {
         return team;
     }
 }
-

@@ -1,27 +1,54 @@
-package od;
+package leetcode.n1125;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class Main {
+public class Solution1 {
+
     public static void main(String[] args) {
-        List<String> game = Arrays.asList("skipping rope", "sit-ups", "Rubik's Cube");
+        String[] game = {"skipping rope", "sit-ups", "Rubik's Cube"};
         List<List<String>> athletes = Arrays.asList(Arrays.asList("sit-ups"), Arrays.asList("skipping rope"), Arrays.asList("sit-ups", "Rubik's Cube"));
-        iWantYou2(game, athletes).forEach(System.out::println);
+        Solution1 s = new Solution1();
+        Arrays.stream(s.smallestSufficientTeam(game, athletes)).forEach(System.out::println);
 
     }
 
+    public int[] smallestSufficientTeam(String[] req_skills, List<List<String>> people) {
+        int minSize = -1;
+        List<Integer> temp, team = new ArrayList<Integer>();
 
-    private static List<Integer> iWantYou(List<String> game, List<List<String>> athletes, int beginIndex, int minSize) {
+        for (int i = 0; i < people.size(); i++) {
+            temp = iWantYou(req_skills, people, i, minSize);
+            if (minSize == -1 && temp != null) {
+                minSize = temp.size();
+                team = temp;
+            } else if (minSize != -1 && temp != null) {
+                minSize = temp.size();
+                team = temp;
+            }
+        }
+        team.sort(Integer::compareTo);
+        return team.stream().mapToInt(Integer::valueOf).toArray();
+    }
+
+    private List<String> toList(String[] game) {
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < game.length; i++) {
+            list.add(game[i]);
+        }
+        return list;
+    }
+
+
+    private List<Integer> iWantYou(String[] game, List<List<String>> athletes, int beginIndex, int minSize) {
         List<Integer> team = new ArrayList<>();
         List athlete;
-        List<String> tempList = new ArrayList<>();
-        tempList.addAll(game);
+        List<String> tempList = toList(game);
         Iterator<String> games;
         boolean isChoose = false;
-
 
         for (int i = beginIndex; i < athletes.size(); i++) {
             athlete = athletes.get(i);
@@ -70,25 +97,5 @@ public class Main {
         return null;
     }
 
-    private static List<Integer> iWantYou2(List<String> game, List<List<String>> athletes) {
-        int minSize = -1;
-        List<Integer> team = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
 
-        //athletes.sort((list1, list2) -> Integer.compare(list2.size(), list1.size()));
-
-
-        for (int i = 0; i < athletes.size(); i++) {
-            temp = iWantYou(game, athletes, i, minSize);
-            if (minSize == -1 && temp != null) {
-                minSize = temp.size();
-                team = temp;
-            } else if (minSize != -1 && temp != null) {
-                minSize = temp.size();
-                team = temp;
-            }
-        }
-        return team;
-    }
 }
-

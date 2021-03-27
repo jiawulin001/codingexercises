@@ -3,9 +3,10 @@ package nowcoder.hj107;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main22(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String str;
         Double num;
@@ -29,6 +30,34 @@ public class Main {
                     break;
                 }
             }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        Double number;
+        Double max;
+        Double min;
+        Double input;
+        Double cj;
+        while (in.hasNext()) {
+            input = in.nextDouble();
+            max = input;
+            min = 0.0;
+
+            while (max - min > 0.001) {
+                number = (max + min) / 2;
+                cj = number * number * number;
+                if (cj > input) {
+                    max = number;
+                } else if (cj < input) {
+                    min = number;
+                } else {
+                    max = number;
+                    break;
+                }
+            }
+            System.out.printf("%.1f", max);
         }
     }
 }
