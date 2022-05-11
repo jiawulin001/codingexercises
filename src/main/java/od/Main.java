@@ -1,94 +1,35 @@
 package od;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import com.alibaba.fastjson.JSON;
 
+import java.util.Arrays;
+
+/**
+ * https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/
+ */
 public class Main {
     public static void main(String[] args) {
-        List<String> game = Arrays.asList("skipping rope", "sit-ups", "Rubik's Cube");
-        List<List<String>> athletes = Arrays.asList(Arrays.asList("sit-ups"), Arrays.asList("skipping rope"), Arrays.asList("sit-ups", "Rubik's Cube"));
-        iWantYou2(game, athletes).forEach(System.out::println);
+        String s = "aasssbadafddfaa";
 
-    }
-
-
-    private static List<Integer> iWantYou(List<String> game, List<List<String>> athletes, int beginIndex, int minSize) {
-        List<Integer> team = new ArrayList<>();
-        List athlete;
-        List<String> tempList = new ArrayList<>();
-        tempList.addAll(game);
-        Iterator<String> games;
-        boolean isChoose = false;
-
-
-        for (int i = beginIndex; i < athletes.size(); i++) {
-            athlete = athletes.get(i);
-            games = tempList.iterator();
-            while (games.hasNext()) {
-                if (athlete.contains(games.next())) {
-                    isChoose = true;
-                    games.remove();
-                }
-            }
-
-            if (isChoose) {
-                team.add(i);
-                if (minSize != -1 && minSize <= team.size()) {
-                    return null;
-                }
-
-                if (tempList.isEmpty()) {
-                    return team;
-                }
-            }
+        Character[] chars = new Character[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            chars[i] = s.charAt(i);
         }
 
-        for (int i = 0; i < beginIndex; i++) {
-            athlete = athletes.get(i);
-            games = tempList.iterator();
-            while (games.hasNext()) {
-                if (athlete.contains(games.next())) {
-                    isChoose = true;
-                    games.remove();
-                }
-            }
-
-            if (isChoose) {
-                team.add(i);
-                if (minSize != -1 && minSize <= team.size()) {
-                    return null;
-                }
-
-                if (tempList.isEmpty()) {
-                    return team;
-                }
-            }
+        int[] count = new int[123];
+        for (int i = 0; i < chars.length; i++) {
+            count[chars[i]] += 1;
         }
 
-        return null;
-    }
-
-    private static List<Integer> iWantYou2(List<String> game, List<List<String>> athletes) {
-        int minSize = -1;
-        List<Integer> team = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
-
-        //athletes.sort((list1, list2) -> Integer.compare(list2.size(), list1.size()));
-
-
-        for (int i = 0; i < athletes.size(); i++) {
-            temp = iWantYou(game, athletes, i, minSize);
-            if (minSize == -1 && temp != null) {
-                minSize = temp.size();
-                team = temp;
-            } else if (minSize != -1 && temp != null) {
-                minSize = temp.size();
-                team = temp;
+        Arrays.sort(chars, (c1, c2) -> {
+            int sum = count[c1] - count[c2];
+            if (sum == 0) {
+                return c1 - c2;
             }
-        }
-        return team;
+            return -sum;
+        });
+
+        System.out.println(JSON.toJSONString(chars));
     }
 }
 

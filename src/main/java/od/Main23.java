@@ -1,7 +1,6 @@
 package od;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class Main23 {
 
@@ -18,7 +17,7 @@ public class Main23 {
         int[] nums = {21, 30, 62, 5, 31};
         Arrays.sort(nums);
         Integer[] n = {nums[0], nums[1], nums[2]};
-        Arrays.sort(n,(n1, n2) -> Integer.valueOf(n1 + "" + n2) - Integer.valueOf(n2 + "" + n1));
+        Arrays.sort(n, (n1, n2) -> Integer.valueOf(n1 + "" + n2) - Integer.valueOf(n2 + "" + n1));
         for (int i = 0; i < n.length; i++) {
             System.out.print(n[i]);
         }
@@ -26,10 +25,16 @@ public class Main23 {
 
 
     public static void main(String[] args) {
-        String a = "123";
-        String b = "321";
+        int n = 9;
 
+        printDecom(n, 1, n + "=");
+    }
 
+    private static void printDecom(int n, int min, String str) {
+        for (int i = min; i <= n / 2; i++) {
+            printDecom(n - 1, i, str + i + "+");
+        }
+        System.out.println(str + n);
     }
 }
 

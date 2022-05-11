@@ -36,3 +36,33 @@ public class Solution {
         return maxSize;
     }
 }
+
+
+class Solution2 {
+    public static void main(String[] args) {
+        Solution2 s = new Solution2();
+        System.out.println(s.lengthOfLongestSubstring("abba"));
+        System.out.println(s.lengthOfLongestSubstring("au"));
+        System.out.println(s.lengthOfLongestSubstring("abcbcbb"));
+        System.out.println(s.lengthOfLongestSubstring("bbbbb"));
+        System.out.println(s.lengthOfLongestSubstring("pwwkew"));
+        System.out.println(s.lengthOfLongestSubstring(""));
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        int[] index = new int[128];
+        for (int i = 0; i < index.length; i++) {
+            index[i]--;
+        }
+
+        int max = 0;
+        int begin = 0;
+        for (int i = 0; i < s.length(); i++) {
+            begin = Math.max(begin,index[s.charAt(i)] + 1);
+            max = Math.max(i - begin + 1, max);
+            index[s.charAt(i)] = i;
+        }
+
+        return max;
+    }
+}
